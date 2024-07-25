@@ -1,11 +1,14 @@
 
 import pandas as pd
-import joblib
+#import joblib
 import numpy as np
 import streamlit as st
+import pickle
 from data_cleaner import clean_data
 
-model = joblib.load('model.joblib')
+#model = joblib.load('model.joblib')
+with open('model.pkl', 'rb') as f:
+    loaded_model = pickle.load(f)
 def collect_user_input():
     bedroom = st.number_input('No of Bedrooms', min_value=1, max_value=20, value='min')
     fullbath = st.number_input('No of Bathrooms', min_value=1, max_value=10, value='min')
@@ -22,5 +25,5 @@ st.write('Predict the price of an apartment')
 input_data = collect_user_input()
 if st.button('Predict'):
     with st.spinner('Calculating the price of an apartment'):
-        prediction = model.predict(input_data)
+        prediction = loaded_model.predict(input_data)
         st.success(f'The apartment would cost around USD {int(prediction[0])}.')
