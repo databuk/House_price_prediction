@@ -7,10 +7,10 @@ from data_cleaner import clean_data
 
 model = joblib.load('model.joblib')
 def collect_user_input():
-    bedroom = st.number_input('No of Bedrooms', min_value=0, max_value=20, value='min')
-    fullbath = st.number_input('No of Bathrooms', min_value=0, max_value=10, value='min')
-    lotarea= st.number_input('Area(sqft)', min_value=0, max_value=500000, value='min')
-    age = st.number_input('How old is the house(years)?', min_value=0, max_value=200, value='min')
+    bedroom = st.number_input('No of Bedrooms', min_value=1, max_value=20, value='min')
+    fullbath = st.number_input('No of Bathrooms', min_value=1, max_value=10, value='min')
+    lotarea= st.number_input('Area(sqft)', min_value=100, max_value=500000, value='min')
+    age = st.number_input('How old is the house(years)?', min_value=1, max_value=200, value='min')
     location = st.selectbox('Location', options=['Urban', 'SubUrban', 'Rural'])
 
     input_data = pd.DataFrame(data= [[bedroom, fullbath, lotarea, location, age]],
